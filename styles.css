@@ -1,0 +1,227 @@
+/* 공통 스타일 */
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.container {
+  width: 80%;
+  max-width: 800px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  text-align: center;
+  color: #333;
+}
+.emoji {
+  font-size: 2rem;
+}
+.calculator {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+.info {
+  padding-top: 0.875rem;
+  border-top: 1px solid #034286;
+}
+.desc {
+  margin: 0;
+  color: darkslategrey;
+  font-size: 0.875rem;
+}
+.desc + .desc {
+  margin-top: 0.125rem;
+}
+.d-flex {
+  display: flex;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.align-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.f-bold {
+  font-weight: bold;
+}
+.ml-0 {
+  margin-left: 0.5rem;
+}
+.hide {
+  display: none;
+}
+label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+select {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-image: url('./images/arrow_down.svg');
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-size: 16px 12px;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  appearance: none;
+}
+button {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #034286;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background-color: #0768d0;
+}
+.btn-default {
+  background-color: #bebebe;
+}
+.btn-default:hover {
+  background-color: #f9f9f9;
+  color: #333;
+}
+button + button {
+  margin-left: 0.5rem;
+}
+footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #777;
+}
+input[type="date"] {
+  appearance: none;
+  background-color: #ffffff;
+  /* border: 2px solid #4CAF50; */
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+/* 달력 아이콘 추가 (Webkit 계열 브라우저용) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url('https://cdn-icons-png.flaticon.com/512/747/747310.png') no-repeat center;
+  background-size: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+/* Placeholder 스타일 (기본 날짜 입력값이 없을 때) */
+input[type="date"]:invalid {
+  color: #aaa;
+}
+.row {
+  margin: 0 -0.5rem;
+}
+.row + .row {
+  margin-top: 0.5rem;
+}
+.row .col {
+  flex-grow: 1;
+  padding: 0 0.5rem;
+}
+.btn-wrap {
+  margin: 1rem 0;
+}
+table {
+  border: 1px solid #333;
+}
+th, td {
+  padding: 0.125rem 0.5rem;
+  border: 1px solid #333;
+  text-align: center;
+}
+th:first-child,
+th:nth-child(2),
+td:first-child,
+td:nth-child(2) {
+  font-size: 0.875rem;
+}
+.totalPay {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-top: 1px solid #034286;
+  border-bottom: 1px solid #034286;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+.popup {
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); /* 검은색 배경 */
+}
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* 팝업 너비 */
+  max-width: 800px;
+}
+.popup p {
+  margin: 0.5rem 0;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 다크 모드 대응 */
+/* @media (prefers-color-scheme: dark) {
+} */

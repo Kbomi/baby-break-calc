@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>출산 & 육아휴직 계산기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>출산 & 육아휴직 계산기 👶</h1>
+        
+        <!-- 출산 휴가 계산기 -->
+        <section class="calculator">
+            <h2>출산휴가 날짜 계산기 <span class="emoji">🤰</span></h2>
+            <div class="d-flex flex-wrap align-center">
+              <label>휴가 시작일:</label>
+              <input type="date" id="maternityStart">
+              <button class="ml-0" onclick="calculateMaternityLeave()">계산하기</button>
+            </div>
+            <p class="f-bold">휴가 마지막 날: <span id="maternityResult"></span></p>
+            <div class="info">
+              <p class="desc">* 90일 중 45일은 반드시 출산일 후로 유지 되어야 합니다.</p>
+              <p class="desc">💸 출산휴가 중 급여는 월 통상임금 100% 입니다. (최대 250만원) 💸</p>
+            </div>
+        </section>
+        
+        <!-- 육아 휴직 날짜 계산기 -->
+        <section class="calculator">
+          <h2>육아휴직 날짜 계산기 <span class="emoji">🤱</span></h2>
+
+        </section>
+
+        <!-- 육아휴직 급여 계산기 -->
+        <section class="calculator">
+            <div class="d-flex flex-wrap align-center justify-between">
+              <h2 class="col">육아휴직 급여 계산기 <span class="emoji">💸</span></h2>
+              <div class="col"><button id="showPopup">급여 정책 보기</button></div>
+            </div>
+            <div class="row d-flex align-center flex-wrap">
+              <div class="col d-flex flex-wrap align-center">
+                <label>육아휴직 시작일:</label>
+                <input type="date" id="parentalStart">
+              </div>
+              <div class="col d-flex flex-wrap align-center">
+                <label>육아휴직 기간 (개월):</label>
+                <select name="parentalMonths" id="parentalMonths">
+                  <option value="1">1개월</option>
+                  <option value="2">2개월</option>
+                  <option value="3">3개월</option>
+                  <option value="4">4개월</option>
+                  <option value="5">5개월</option>
+                  <option value="6">6개월</option>
+                  <option value="7">7개월</option>
+                  <option value="8">8개월</option>
+                  <option value="9">9개월</option>
+                  <option value="10">10개월</option>
+                  <option value="11">11개월</option>
+                  <option value="12">12개월 (1년)</option>
+                </select>
+              </div>
+            </div>
+            <div class="row d-flex align-center flex-wrap">
+              <div class="col d-flex flex-wrap align-center">
+                <label for="paySalary">월 통상임금 (원)</label>
+                <input type="text" id="paySalary" placeholder="" oninput="formatSalaryInput(this)">  
+              </div>
+              <div class="col d-flex flex-wrap align-center">
+                <label for="singleParent">한부모 근로자 여부</label>
+                <select id="singleParent">
+                  <option value="no">아니요</option>
+                  <option value="yes">네</option>
+                </select>
+              </div>
+            </div>
+            <div class="row d-flex align-center flex-wrap">
+              <div class="col d-flex flex-wrap align-center">
+                <label for="doubleParent">6+6 부모 육아 휴직제</label>
+                <select id="doubleParent" onchange="changeDoubleParent()">
+                  <option value="no">미해당</option>
+                  <option value="yes">해당</option>
+                </select>
+              </div>
+              <div class="col d-flex flex-wrap align-center">
+                <label for="spouseMonths">배우자 육아휴직 기간 (개월)</label>
+                <select name="spouseMonths" id="spouseMonths" disabled>
+                  <option value="1">1개월</option>
+                  <option value="2">2개월</option>
+                  <option value="3">3개월</option>
+                  <option value="4">4개월</option>
+                  <option value="5">5개월</option>
+                  <option value="6">6개월</option>
+                  <option value="7">7개월</option>
+                  <option value="8">8개월</option>
+                  <option value="9">9개월</option>
+                  <option value="10">10개월</option>
+                  <option value="11">11개월</option>
+                  <option value="12">12개월 (1년)</option>
+                </select>
+              </div>
+            </div>
+            <div class="btn-wrap d-flex flex-wrap align-center justify-center">
+              <button class="btn-default" onclick="resetParentalLeavePay()">초기화</button>
+              <button onclick="calculateParentalLeavePay()">계산하기</button>
+            </div>
+
+            <div class="info">
+              <p class="desc">* 고용보험 피보험자(180일 이상)인 근로자를 대상으로 합니다.</p>
+              <p class="desc">* 월 통상임금은 세전(공제전) 임금을 기준으로 합니다.</p>
+              <p class="desc">* 급여는 육아휴직 기간 중 전액 지급되며, 사후 지급은 없습니다.</p>
+              <p class="desc">* 부모가 육아휴직을 각 3개월 이상 사용하는 경우 육아휴직 기간이 1년에서 1년 6개월로 확대 됩니다.</p>
+              <p class="desc">* 6+6 부모 육아휴직제는 자녀 출산 18개월 이내에 부모가 동시 또는 차례대로 육아휴직을 사용할 때 적용됩니다. <br/>
+                따라서 두 번째 육아휴직자의 육아휴직 개시 시점이 자녀 생후 18개월 이내라면, 육아휴직 도중 생후 18개월을 초과하더라도 6+6 부모육아휴직제 적용이 가능합니다.</p>
+            </div>
+
+            <div id="salaryResult" class="hide">
+              <p id="parentalResult" class="totalPay"></p>
+              <h3>육아휴직급여 상세내역</h3>
+              <div class="row d-flex align-center">
+                <div class="col">
+                  <table id="monthlyResult"></table>
+                </div>
+                <div class="col">
+                  <canvas id="salaryChart"></canvas>
+                </div>
+              </div>
+  
+              <div id="spouse" class="hide">
+                <p id="spouseResult" class="totalPay"></p>
+                <h3>육아휴직급여 상세내역</h3>
+                <div class="row d-flex align-center">
+                  <div class="col">
+                    <table id="spouseMonthlyResult"></table>
+                  </div>
+                  <div class="col">
+                    <canvas id="spouseSalaryChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+        
+        <footer>
+            ⚠️ 본 계산기는 모의계산 결과로 법적 효력이 없으며 실제와 차이가 있을 수 있습니다.<br/>
+            해당 사이트에 의견/문제가 있다면 <a href="mailto:93rlaqhal@gmail.com">93rlaqhal@gmail.com</a>으로 연락주세요.
+        </footer>
+    </div>
+
+    <!-- 육아휴직 급여 정책 팝업 -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+          <span class="close" id="closePopup">&times;</span>
+          <h2>2025년 육아휴직 급여 정책</h2>
+          <h3>1. 일반 육아휴직 급여</h3>
+          <p>육아휴직 시작일로부터 3개월까지: 월 통상임금의 100% (상한액 250만원, 하한액 70만원)</p>
+          <p>육아휴직 4개월째부터 6개월째까지: 월 통상임금의 100% (상한액 200만원, 하한액 70만원)</p>
+          <p>육아휴직 7개월째부터 종료일까지: 월 통상임금의 80% (상한액 160만원, 하한액 70만원)</p>
+          
+          <h3>2. 한부모 육아휴직 급여 (특례제도)</h3>
+          <p>육아휴직 시작일로부터 3개월까지: 월 통상임금의 100% (상한액 300만원, 하한액 70만원)</p>
+          <p>육아휴직 4개월째부터 6개월째까지: 월 통상임금의 100% (상한액 200만원, 하한액 70만원)</p>
+          <p>육아휴직 7개월째부터 종료일까지: 월 통상임금의 80% (상한액 160만원, 하한액 70만원)</p>
+          
+          <h3>3. 6+6 부모 육아휴직제</h3>
+          <p>부모가 동시에 또는 순차적으로 육아휴직을 사용할 경우, 첫 6개월 동안 각각의 육아휴직 급여가 통상임금의 100%로 상향 지급됩니다. 상한액은 다음과 같습니다:</p>
+          <ul>
+              <li>엄마 6개월 + 아빠 6개월: 부모 각각 통상임금 100% (상한액 450만원)</li>
+              <li>엄마 5개월 + 아빠 5개월: 부모 각각 통상임금 100% (상한액 400만원)</li>
+              <li>엄마 4개월 + 아빠 4개월: 부모 각각 통상임금 100% (상한액 350만원)</li>
+              <li>엄마 3개월 + 아빠 3개월: 부모 각각 통상임금 100% (상한액 300만원)</li>
+              <li>엄마 2개월 + 아빠 2개월: 부모 각각 통상임금 100% (상한액 250만원)</li>
+              <li>엄마 1개월 + 아빠 1개월: 부모 각각 통상임금 100% (상한액 250만원)</li>
+          </ul>
+          <h3>적용 조건</h3>
+          <p>부모 중 한 명이라도 개정법령 시행(2024. 1. 1.) 이후 육아휴직을 최초로 사용한 경우, 또는 부모 모두 2023년에 육아휴직을 최초 개시하였어도, 부모 중 한 명이라도 개정법 시행 이후 요건에 맞게 사용한 육아휴직 기간이 있는 경우에 적용됩니다.</p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- Chart.js CDN -->
+    <script src="script.js"></script>
+</body>
+</html>
