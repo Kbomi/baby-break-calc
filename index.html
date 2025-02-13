@@ -29,7 +29,62 @@
         <!-- 육아 휴직 날짜 계산기 -->
         <section class="calculator">
           <h2>육아휴직 날짜 계산기 <span class="emoji">🤱</span></h2>
-
+          <div class="row d-flex align-center justify-between flex-wrap">
+            <div class="col d-flex flex-wrap align-center">
+              <label for="leave-period">총 기간: </label>
+              <select id="leave-period">
+                  <option value="12">1년</option>
+                  <option value="18">1년 6개월</option>
+              </select>
+            </div>
+            <div class="col"><p class="m-0 text-end">육아휴직은 총 3회 분할 가능합니다.</p></div>
+          </div>
+          <table class="calculator-table">
+            <thead>
+                <tr>
+                    <th>회차</th>
+                    <th>시작일</th>
+                    <th>종료일</th>
+                    <th>개월(M)</th>
+                    <th>일(D)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><input type="date" class="start-date"></td>
+                    <td><input type="date" class="end-date"></td>
+                    <td class="months">0</td>
+                    <td class="days">0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="date" class="start-date"></td>
+                    <td><input type="date" class="end-date"></td>
+                    <td class="months">0</td>
+                    <td class="days">0</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><input type="date" class="start-date"></td>
+                    <td><input type="date" class="end-date"></td>
+                    <td class="months">0</td>
+                    <td class="days">0</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">사용 합계</td>
+                    <td colspan="3" class="result">0 개월 0 일</td>
+                </tr>
+            </tfoot>
+          </table>
+          <p class="error hide">❗ 시작일과 종료일을 모두 입력해주세요.</p>
+          <p class="f-bold">잔여 개월 수: <span id="remaining-months">0 개월 0 일</span></p>
+          <div class="btn-wrap d-flex flex-wrap align-center justify-center">
+            <button class="btn-default" onclick="resetDayCalc()">초기화</button>
+            <button onclick="calculate()">계산하기</button>
+          </div>
         </section>
 
         <!-- 육아휴직 급여 계산기 -->
@@ -64,7 +119,7 @@
             <div class="row d-flex align-center flex-wrap">
               <div class="col d-flex flex-wrap align-center">
                 <label for="paySalary">월 통상임금 (원)</label>
-                <input type="text" id="paySalary" placeholder="" oninput="formatSalaryInput(this)">  
+                <input type="text" id="paySalary" placeholder="세전(공제전) 임금을 기준으로 합니다." oninput="formatSalaryInput(this)">  
               </div>
               <div class="col d-flex flex-wrap align-center">
                 <label for="singleParent">한부모 근로자 여부</label>
@@ -107,7 +162,6 @@
 
             <div class="info">
               <p class="desc">* 고용보험 피보험자(180일 이상)인 근로자를 대상으로 합니다.</p>
-              <p class="desc">* 월 통상임금은 세전(공제전) 임금을 기준으로 합니다.</p>
               <p class="desc">* 급여는 육아휴직 기간 중 전액 지급되며, 사후 지급은 없습니다.</p>
               <p class="desc">* 부모가 육아휴직을 각 3개월 이상 사용하는 경우 육아휴직 기간이 1년에서 1년 6개월로 확대 됩니다.</p>
               <p class="desc">* 6+6 부모 육아휴직제는 자녀 출산 18개월 이내에 부모가 동시 또는 차례대로 육아휴직을 사용할 때 적용됩니다. <br/>
