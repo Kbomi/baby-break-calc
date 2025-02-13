@@ -16,7 +16,7 @@ body {
   max-width: 800px;
   height: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1.25rem;
   background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -29,10 +29,10 @@ h1 {
 }
 .calculator {
   background: #fff;
-  padding: 15px;
-  border-radius: 10px;
+  padding: 0.938rem;
+  border-radius: 0.625rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 .info {
   padding-top: 0.875rem;
@@ -46,6 +46,23 @@ h1 {
 .desc + .desc {
   margin-top: 0.125rem;
 }
+.f-bold {
+  font-weight: bold;
+}
+.ml-0 {
+  margin-left: 0.5rem;
+}
+.hide {
+  display: none;
+}
+.m-0 {
+  margin: 0;
+}
+.text-end {
+  text-align: end;
+}
+
+/* Flexbox 유틸리티 */
 .d-flex {
   display: flex;
 }
@@ -61,40 +78,72 @@ h1 {
 .justify-between {
   justify-content: space-between;
 }
-.f-bold {
-  font-weight: bold;
+.row {
+  margin: 0 -0.5rem;
 }
-.ml-0 {
-  margin-left: 0.5rem;
+.row + .row {
+  margin-top: 0.5rem;
 }
-.hide {
-  display: none;
+.row .col {
+  flex-grow: 1;
+  padding: 0 0.5rem;
 }
+
+/* 폼 스타일 */
 label {
   margin-right: 0.5rem;
   font-weight: bold;
 }
 input {
   flex: 1;
-  padding: 10px;
+  padding: 0.625rem;
   border: 2px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+input[type="date"] {
+  appearance: none;
+  background-color: #ffffff;
+  /* border: 2px solid #4CAF50; */
+  border-radius: 8px;
+  padding: 0.625rem 0.75rem;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+/* 달력 아이콘 추가 (Webkit 계열 브라우저용) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url('https://cdn-icons-png.flaticon.com/512/747/747310.png') no-repeat center;
+  background-size: 1.25rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+/* Placeholder 스타일 (기본 날짜 입력값이 없을 때) */
+input[type="date"]:invalid {
+  color: #aaa;
+}
 select {
   flex: 1;
-  padding: 10px;
+  padding: 0.625rem;
   border: 2px solid #ddd;
   border-radius: 8px;
   background-image: url('./images/arrow_down.svg');
   background-repeat: no-repeat;
   background-position: right .75rem center;
-  background-size: 16px 12px;
+  background-size: 1rem 0.75rem;
   font-size: 1rem;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   appearance: none;
 }
+
+/* 버튼 스타일 */
 button {
   margin: 0;
   padding: 0.875rem 1rem;
@@ -119,51 +168,11 @@ button:hover {
 button + button {
   margin-left: 0.5rem;
 }
-footer {
-  margin-top: 20px;
-  font-size: 12px;
-  color: #777;
-}
-input[type="date"] {
-  appearance: none;
-  background-color: #ffffff;
-  /* border: 2px solid #4CAF50; */
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 1rem;
-  color: #333;
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-/* 달력 아이콘 추가 (Webkit 계열 브라우저용) */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  background: url('https://cdn-icons-png.flaticon.com/512/747/747310.png') no-repeat center;
-  background-size: 20px;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s;
-}
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
-}
-/* Placeholder 스타일 (기본 날짜 입력값이 없을 때) */
-input[type="date"]:invalid {
-  color: #aaa;
-}
-.row {
-  margin: 0 -0.5rem;
-}
-.row + .row {
-  margin-top: 0.5rem;
-}
-.row .col {
-  flex-grow: 1;
-  padding: 0 0.5rem;
-}
 .btn-wrap {
   margin: 1rem 0;
 }
+
+/* 테이블 스타일 */
 table {
   border: 1px solid #333;
 }
@@ -178,14 +187,16 @@ td:first-child,
 td:nth-child(2) {
   font-size: 0.875rem;
 }
-.totalPay {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  border-top: 1px solid #034286;
-  border-bottom: 1px solid #034286;
-  font-size: 1.125rem;
-  font-weight: bold;
+.calculator-table {
+  width: 100%;
+  margin: 1rem 0;
+  border-collapse: collapse;
 }
+.calculator-table tfoot td {
+  padding: 0.5rem 0;
+}
+
+/* 팝업 스타일 */
 .popup {
   display: none; 
   position: fixed;
@@ -201,7 +212,7 @@ td:nth-child(2) {
 .popup-content {
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
+  padding: 1.25rem;
   border: 1px solid #888;
   width: 80%; /* 팝업 너비 */
   max-width: 800px;
@@ -212,7 +223,7 @@ td:nth-child(2) {
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: bold;
 }
 .close:hover,
@@ -221,20 +232,22 @@ td:nth-child(2) {
   text-decoration: none;
   cursor: pointer;
 }
-.calculator-table {
-  width: 100%;
-  margin: 1rem 0;
-  border-collapse: collapse;
+
+/* 기타 스타일 */
+footer {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  color: #777;
 }
-.calculator-table tfoot td {
-  padding: 0.5rem 0;
+.totalPay {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-top: 1px solid #034286;
+  border-bottom: 1px solid #034286;
+  font-size: 1.125rem;
+  font-weight: bold;
 }
-.m-0 {
-  margin: 0;
-}
-.text-end {
-  text-align: end;
-}
+
 /* 다크 모드 대응 */
 /* @media (prefers-color-scheme: dark) {
 } */
