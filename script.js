@@ -21,6 +21,7 @@ function calculateMaternityLeave() {
   // };
 }
 
+// 날짜 포맷 변환 (YYYY-MM-DD)
 function formatDate(date) {
   return date.toISOString().split('T')[0]; // YYYY-MM-DD 형식
 }
@@ -156,8 +157,6 @@ function calculateParentalLeavePay() {
   document.getElementById("parentalResult").innerText = `총 지급액: ${totalAmount.toLocaleString()}원`;
   document.getElementById("monthlyResult").innerHTML = resultHTML;
 
-  console.log('monthlySalaries:::', monthlySalaries);
-  console.log('spouseMonthlySalaries:::', spouseMonthlySalaries);
   drawSalaryChart(monthlySalaries);
 
   if (isDoubleParent) {
@@ -279,4 +278,152 @@ window.onclick = function(event) {
   if (event.target == document.getElementById("popup")) {
       document.getElementById("popup").style.display = "none";
   }
+}
+
+// 육아휴직 날짜 계산
+function calculate() {
+  const rows = document.querySelectorAll(".calculator-table tbody tr");
+  let totalMonths = 0;
+  let totalDays = 0;
+  let totalSum = 0; // 합산(M+D/C) 총합
+
+  rows.forEach(row => {
+      const startDateInput = row.querySelector(".start-date").value;
+      const endDateInput = row.querySelector(".end-date").value;
+
+      if (!startDateInput || !endDateInput) return;
+
+      const startDate = new Date(startDateInput);
+      const endDate = new Date(endDateInput);
+      endDate.setDate(endDate.getDate() + 1); // 종료일 +1 처리
+      const { months, days } = getMonthDayDiff(startDate, endDate);
+      
+      // 일할 계산 시작일
+      const calcStartDate = getCalcStartDate(startDate, endDate, months);
+      
+      // 일할 계산 종료일
+      const calcEndDate = getLastDateOfNextMonth(startDate, months);
+
+      // 일할 계산 분모 (C)
+      const daysInMonth = datediffDays(calcStartDate, calcEndDate);
+      
+      // 일할 계산 값 (D/C)
+      let dDivC = Math.floor((days / daysInMonth) * 1000) / 1000;
+      
+      // 합산 (M + D/C)
+      const factor = Math.pow(10, 3);
+      let mDC = Math.floor((months + parseFloat(dDivC)) * factor) / factor; 
+      totalSum += parseFloat(mDC);
+
+      // UI 업데이트
+      row.querySelector(".months").textContent = months;
+      row.querySelector(".days").textContent = days;
+
+      totalMonths += months;
+      totalDays += days;
+  });
+
+  // 총 개월 + 일 변환
+  let formattedSum = formatMonthsAndDays(totalSum);
+  document.querySelector(".result").textContent = formattedSum;
+
+  // 잔여 개월 수 계산
+  const maxLeaveMonths = parseInt(document.getElementById("leave-period").value);
+  let remaining = maxLeaveMonths - totalSum;
+  let formattedRemaining = formatMonthsAndDays(remaining);
+  document.getElementById("remaining-months").textContent = formattedRemaining;
+}
+
+// NOTE: 시작일과 종료일 차이 계산
+function getMonthDayDiff(startDate, endDate) {
+  let start = new Date(startDate);
+  let end = new Date(endDate);
+  
+  if (start > end) {
+      [start, end] = [end, start]; // 시작일이 종료일보다 크면 교체
+  }
+
+  let years = end.getFullYear() - start.getFullYear();
+  let months = end.getMonth() - start.getMonth();
+  let days = end.getDate() - start.getDate();
+
+  if (days < 0) {
+      months -= 1; 
+      let prevMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+      days += prevMonth.getDate();
+  }
+
+  if (months < 0) {
+      years -= 1;
+      months += 12;
+  }
+
+  return { months: years * 12 + months, days };
+}
+
+// 소수점 개월을 '개월+일' 형식으로 변환
+function formatMonthsAndDays(value) {
+  let months = Math.floor(value);
+  let days = Math.round((value - months) * 30); // 1개월 = 30일 기준
+  return `${months}개월 ${days}일`;
+}
+
+// 일할계산 시작일 구하기
+function getCalcStartDate(startDate, endDate, months) {
+  // startDate와 endDate 날짜 차이를 "md" 방식으로 계산
+  let diffInMonths = (endDate.getFullYear() - startDate.getFullYear()) * 12 + endDate.getMonth() - startDate.getMonth();
+  let diffInDays = endDate.getDate() - startDate.getDate();
+
+  // 날짜 차이가 음수일 경우
+  if (diffInDays < 0) {
+      diffInMonths -= 1;
+  }
+
+  // 월을 더한 새로운 날짜 계산
+  let resultDate = new Date(startDate);
+  resultDate.setMonth(startDate.getMonth() + months);
+
+  // 만약 "md" 차이가 음수라면 보정
+  if (diffInMonths < 0) {
+      // "md" 차이에 해당하는 날짜를 더함
+      resultDate.setDate(resultDate.getDate() + diffInDays);
+  }
+
+  return resultDate.toLocaleDateString('ko-KR', { // 시간대(Timezone) 문제 때문에 toLocaleDateString
+          year: 'numeric', month: '2-digit', day: '2-digit'
+  }).replace(/\. /g, '-').replace('.', '');
+}
+
+// 일할계산 종료일 구하기
+function getLastDateOfNextMonth(date, monthsToAdd) {
+  // 'monthsToAdd'만큼 월을 더하고 1을 더해서 다음 달로 이동
+  date.setMonth(date.getMonth() + monthsToAdd + 1);
+  // 그 달의 마지막 날짜가 되도록 일(day)을 -1 해서 하루를 빼기
+  date.setDate(date.getDate() - 1);
+
+  // 결과를 원하는 형식 (YYYY-MM-DD)으로 반환
+  return date.toLocaleDateString('ko-KR', { // 시간대(Timezone) 문제 때문에 toLocaleDateString
+    year: 'numeric', month: '2-digit', day: '2-digit'
+  }).replace(/\. /g, '-').replace('.', '')
+}
+
+// 일할 계산 분모 구하기
+function datediffDays(start, end) {
+  const startCopy = new Date(start);
+  const endCopy = new Date(end);
+  // 두 날짜의 차이 (밀리초 단위로 반환)
+  const diffInMillis = endCopy - startCopy;
+  // 밀리초를 일(day)로 변환 (1일 = 24 * 60 * 60 * 1000 밀리초)
+  const diffInDays = diffInMillis / (24 * 60 * 60 * 1000);
+
+  return diffInDays + 1; // 그 차이에 1을 더합니다.
+}
+
+// 육아휴직 날짜 계산기 초기화
+function resetDayCalc() {
+  document.querySelectorAll(".start-date, .end-date").forEach(input => input.value = "");
+  document.querySelectorAll(".months, .days").forEach(cell => cell.textContent = "0");
+  document.querySelector(".result").textContent = "0 개월 0 일";
+  document.getElementById("remaining-months").textContent = "0 개월 0 일";
+  document.querySelector(".error").classList.add("hide");
 }
