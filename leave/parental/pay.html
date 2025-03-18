@@ -13,129 +13,35 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>출산휴가 & 육아휴직 계산기</title>
-    <meta name="description" content="출산휴가 날짜 계산기, 육아휴직 날짜 계산기 및 육아휴직 급여 계산기를 제공하는 웹사이트입니다. 출산휴가, 육아휴직 날짜 및 급여를 쉽게 계산하세요.">
-    <meta name="keywords" content="출산휴가, 출산휴가 계산, 출산휴가 날짜, 육아휴직, 육아휴직 급여, 육아휴직 급여 계산, 육아휴직 계산, 육아휴직 날짜, 육아휴직 날짜 계산, 육아휴직 기간, 육아휴직 기간 계산">
+    <title>육아휴직 급여 계산기</title>
+    <meta name="description" content="육아휴직 급여 계산기를 제공하는 웹사이트입니다. 육아휴직 급여를 쉽게 계산하세요.">
+    <meta name="keywords" content="육아휴직, 육아휴직 급여, 육아휴직 급여 계산, 육아휴직 계산">
     <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="출산휴가 & 육아휴직 계산기">
-    <meta property="og:description" content="출산휴가 날짜 계산기, 육아휴직 날짜 계산기 및 육아휴직 급여 계산기를 제공하는 웹사이트입니다. 출산휴가, 육아휴직 날짜 및 급여를 쉽게 계산하세요.">
+    <meta property="og:title" content="육아휴직 급여 계산기">
+    <meta property="og:description" content="육아휴직 급여 계산기를 제공하는 웹사이트입니다. 육아휴직 급여를 쉽게 계산하세요.">
     <!-- <meta property="og:image" content="이미지 URL">
     <meta property="og:url" content="웹사이트 URL"> -->
     <meta property="og:type" content="website" />
     <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
-    <link rel="canonical" href="http://babycalc.kko-kkuri.com" />
+    <link rel="canonical" href="https://babycalc.kko-kkuri.com/parental-leave/pay">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="출산휴가 & 육아휴직 계산기">
-    <meta name="twitter:description" content="출산휴가 날짜 계산기, 육아휴직 날짜 계산기 및 육아휴직 급여 계산기를 제공하는 웹사이트입니다. 출산휴가, 육아휴직 날짜 및 급여를 쉽게 계산하세요">
+    <meta name="twitter:title" content="육아휴직 급여 계산기">
+    <meta name="twitter:description" content="육아휴직 급여 계산기를 제공하는 웹사이트입니다. 육아휴직 급여를 쉽게 계산하세요.">
     <!-- <meta name="twitter:image" content="이미지 URL"> -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="./parental.css">
 </head>
 <body>
     <header>
-      <h1>출산 & 육아휴직 계산기 👶</h1>
-      <ul>
-        <li>
-          <a href="/maternity-leave">출산휴가 날짜</a>
-        </li>
-        <li>
-          <a href="/parental-leave">육아휴직 날짜</a>
-        </li>
-        <li>
-          <a href="/parental-leave/pay">육아휴직 급여</a>
-        </li>
-      </ul>
+      <h1 class="ml-auto text-center">육아휴직 급여 계산기 💸</h1>
     </header>
     <div class="container">
-        <!-- 출산 휴가 계산기 -->
-        <section class="calculator" id="maternityLeave">
-            <h2>출산휴가 날짜 계산기 <span class="emoji">🤰</span></h2>
-            <div class="d-flex flex-wrap align-center maternity-leave-form">
-              <label>휴가 시작일:</label>
-              <input type="date" id="maternityStart">
-              <button class="ml-0" onclick="calculateMaternityLeave()">계산하기</button>
-            </div>
-            <p class="f-bold">휴가 마지막 날: <span id="maternityResult"></span></p>
-            <div class="info">
-              <p class="desc">* 출산휴가 기간: 출산 전후를 합하여 총 90일의 휴가가 부여됩니다. 이 중 최소 45일은 출산 후에 사용해야 합니다.<br/>다태아(쌍둥이) 출산의 경우 총 120일의 휴가가 주어집니다.</p>
-              <p class="desc">* 휴가 사용 시기: 출산 예정일을 기준으로 휴가 시작일을 설정하며, 최소 45일은 출산 후에 사용해야 합니다.</p>
-              <p class="desc">💸 출산휴가 중 급여는 월 통상임금 100% 입니다. (최대 250만원) 💸</p>
-            </div>
-        </section>
-        
-        <!-- 육아 휴직 날짜 계산기 -->
-        <section class="calculator" id="parentalLeave" class="hidden">
-          <h2>육아휴직 날짜 계산기 <span class="emoji">🤱</span></h2>
-          <div class="d-flex flex-wrap align-center parental-leave-select">
-            <label for="leave-period">총 기간: </label>
-            <select id="leave-period">
-                <option value="12">1년</option>
-                <option value="18">1년 6개월</option>
-            </select>
-          </div>
-          <p class="m-0 calculator-table-caption">* 육아휴직은 총 3회 분할 가능합니다.</p>
-          <table class="calculator-table">
-            <thead>
-                <tr>
-                    <th>회차</th>
-                    <th>시작일</th>
-                    <th>종료일</th>
-                    <th>개월(M)</th>
-                    <th>일(D)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><input type="date" class="start-date"></td>
-                    <td><input type="date" class="end-date"></td>
-                    <td class="months">0</td>
-                    <td class="days">0</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><input type="date" class="start-date"></td>
-                    <td><input type="date" class="end-date"></td>
-                    <td class="months">0</td>
-                    <td class="days">0</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><input type="date" class="start-date"></td>
-                    <td><input type="date" class="end-date"></td>
-                    <td class="months">0</td>
-                    <td class="days">0</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="2">사용 합계</td>
-                    <td colspan="3" class="result">0 개월 0 일</td>
-                </tr>
-            </tfoot>
-          </table>
-          <p class="error hide parental-leave-error">❗ 시작일과 종료일을 모두 입력해주세요.</p>
-          <div class="btn-wrap d-flex flex-wrap align-center justify-center">
-            <button class="btn-default" onclick="resetDayCalc()">초기화</button>
-            <button onclick="calculate()">계산하기</button>
-          </div>
-          <p class="f-bold parental-leave-result">잔여 개월 수: <span id="remaining-months">0 개월 0 일</span></p>
-          <div class="info">
-            <p class="desc f-bold"><a href="https://www.moel.go.kr/policy/policydata/view.do?bbs_seq=20231200042" target="_blank">* 고용노동부 육아휴직 엑셀 계산기</a>를 토대로 계산됩니다.</p>
-            <p class="desc f-bold">고용노동부 <a href="https://www.moel.go.kr/common/downloadFile.do?file_seq=20250100796&bbs_seq=20241201710&bbs_id=29&file_ext=pdf">2025년 달라지는 육아지원제도</a> 확인하기</p>
-            <p class="desc">* 육아휴직 기간 1년: 임신 중인 여성 근로자나, 8세 또는 초등학교 2학년 이하 자녀를 가진 근로자가 자녀 양육을 위해 최대 1년간 육아휴직을 사용할 수 있는 제도입니다.</p>
-            <p class="desc">* 육아휴직 기간 1년 6개월: 부모가 각각 육아휴직을 각 3개월 이상 사용 했거나, 한부모 또는 중증장애아동 부모이면 1년 6개월 육아휴직을 사용할 수 있습니다.</p>
-          </div>
-        </section>
-
         <!-- 육아휴직 급여 계산기 -->
         <section class="calculator" id="parentalPay" class="hidden">
-            <div class="d-flex flex-wrap align-center justify-between">
-              <h2 class="col">육아휴직 급여 계산기 <span class="emoji">💸</span></h2>
-              <div class="col"><button id="showPopup">급여 정책 보기</button></div>
-            </div>
+            <button id="showPopup">급여 정책 보기</button>
             <div class="row d-flex align-center flex-wrap">
               <div class="col d-flex flex-wrap align-center">
                 <label>육아휴직 시작일:</label>
@@ -273,7 +179,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- Chart.js CDN -->
-    <script src="script.js"></script>
+    <script src="../../script.js"></script>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9140923520326778"

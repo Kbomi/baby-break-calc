@@ -12,29 +12,36 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
 }
 .container {
+  display: flex;
+  flex-direction: column;
   width: 80%;
   max-width: 800px;
+  min-height: calc(100vh - 69px);
   height: 100%;
   margin: 0 auto;
   padding: 1.25rem;
   background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-h1 {
-  text-align: center;
-  color: #333;
-}
 .emoji {
   font-size: 2rem;
 }
 .calculator {
-  background: #fff;
   padding: 0.938rem;
+  background: #fff;
   border-radius: 0.625rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1.25rem;
+  margin-bottom: 2rem;
+}
+.calculator.hidden {
+  display: none;
+}
+.calculator h2 {
+  margin: 0 0 2rem;
+  font-size: 1.25rem;
 }
 .info {
+  margin-top: 2rem;
   padding-top: 0.875rem;
   border-top: 1px solid #034286;
 }
@@ -42,15 +49,19 @@ h1 {
   margin: 0;
   color: darkslategrey;
   font-size: 0.875rem;
+  line-height: 1.5;
 }
 .desc + .desc {
-  margin-top: 0.125rem;
+  margin-top: 0.5rem;
 }
 .f-bold {
   font-weight: bold;
 }
 .ml-0 {
   margin-left: 0.5rem;
+}
+.ml-auto {
+  margin-left: auto;
 }
 .hide {
   display: none;
@@ -60,6 +71,9 @@ h1 {
 }
 .text-end {
   text-align: end;
+}
+.text-center {
+  text-align: center;
 }
 
 /* Flexbox 유틸리티 */
@@ -171,29 +185,29 @@ button + button {
 .btn-wrap {
   margin: 1rem 0;
 }
+button#showPopup {
+  padding: 0;
+  background-color: #fff;
+  font-size: 0.875rem;
+  color: #333;
+  text-decoration: underline;
+}
 
 /* 테이블 스타일 */
 table {
   border: 1px solid #333;
 }
 th, td {
-  padding: 0.125rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   border: 1px solid #333;
   text-align: center;
+  font-size: 0.875rem;
 }
 th:first-child,
 th:nth-child(2),
 td:first-child,
 td:nth-child(2) {
   font-size: 0.875rem;
-}
-.calculator-table {
-  width: 100%;
-  margin: 1rem 0;
-  border-collapse: collapse;
-}
-.calculator-table tfoot td {
-  padding: 0.5rem 0;
 }
 
 /* 팝업 스타일 */
@@ -235,7 +249,8 @@ td:nth-child(2) {
 
 /* 기타 스타일 */
 footer {
-  margin-top: 1.25rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
   font-size: 0.75rem;
   color: #777;
 }
@@ -251,3 +266,92 @@ footer {
 /* 다크 모드 대응 */
 /* @media (prefers-color-scheme: dark) {
 } */
+
+/* 헤더 스타일 */
+header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  -webkit-box-shadow: 0 4px 4px -1px rgba(145,145,145,1);
+  -moz-box-shadow: 0 4px 4px -1px rgba(145,145,145,1);
+  box-shadow: 0 4px 4px -1px rgba(145,145,145,1);
+}
+header h1 {
+  margin-right: auto;
+  font-size: 1.5rem;
+  color: #333;
+}
+header ul {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+header ul li + li {
+  margin-left: 1rem;
+}
+header ul li a {
+  padding: 0;
+  font-size: 0.875rem;
+  color: #333;
+}
+
+/* 출산 휴가 계산기 */
+.maternity-leave-form {
+  margin-bottom: 2rem;
+}
+#maternityStart {
+  max-width: 250px;
+}
+#maternityResult{
+  font-size: 1.25rem;
+  color: #034286;
+}
+
+/* 육아 휴가 계산기 */
+.parental-leave-select {
+  width: 200px;
+  margin-bottom: 1rem;
+}
+.calculator-table-caption {
+  font-size: 0.875rem;
+  color: #777;
+}
+.calculator-table {
+  width: 100%;
+  margin: 0.5rem 0 2rem;
+  border-collapse: collapse;
+}
+.calculator-table td input[type="date"] {
+  padding: 0.5rem 0.75rem;
+}
+.calculator-table tfoot td {
+  padding: 0.5rem 0;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+.parental-leave-error {
+  margin: -1rem 0 0;
+  color: red;
+}
+.parental-leave-result {
+  margin: 2rem 0 0;
+  font-size: 1.25rem;
+  color: #034286;
+}
+#parentalPay .row + .row {
+  margin-top: 1rem;
+}
+#parentalPay .btn-wrap {
+  margin: 2rem 0;
+}
+#parentalPay > .d-flex:first-child {
+  margin-bottom: 2rem;
+}
+#parentalPay h2 {
+  margin-bottom: 0;
+}

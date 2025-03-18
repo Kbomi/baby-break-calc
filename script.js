@@ -11,19 +11,21 @@ function calculateMaternityLeave() {
   end.setDate(end.getDate() + 90); // 90일 추가
   
   const maternityResult = document.getElementById('maternityResult');
-  maternityResult.innerText = formatDate(end);
-
-  // return {
-  //     startDate: formatDate(start),
-  //     endDate: formatDate(end),
-  //     workUntil: formatDate(new Date(start.setDate(start.getDate() - 1))),
-  //     backToWork: formatDate(new Date(end.setDate(end.getDate() + 1)))
-  // };
+  maternityResult.innerText = formatDaetKR(end);
 }
 
 // 날짜 포맷 변환 (YYYY-MM-DD)
 function formatDate(date) {
   return date.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+}
+
+// 날짜 포맷 변환 (YYYY년 MM월 DD일)
+function formatDaetKR(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1
+  const day = date.getDate();
+  
+  return `${year}년 ${month.toString().padStart(2, '0')}월 ${day.toString().padStart(2, '0')}일`;
 }
 
 

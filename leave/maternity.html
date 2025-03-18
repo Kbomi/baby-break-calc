@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFN6E7GRSS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NFN6E7GRSS');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>출산휴가 계산기</title>
+    <meta name="description" content="출산휴가 날짜 계산기를 제공하는 웹사이트입니다. 출산휴가를 쉽게 계산하세요.">
+    <meta name="keywords" content="출산휴가, 출산휴가 계산, 출산휴가 날짜">
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="출산휴가 계산기">
+    <meta property="og:description" content="출산휴가 날짜 계산기를 제공하는 웹사이트입니다. 출산휴가 날짜를 쉽게 계산하세요.">
+    <!-- <meta property="og:image" content="이미지 URL">
+    <meta property="og:url" content="웹사이트 URL"> -->
+    <meta property="og:type" content="website" />
+    <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
+    <link rel="canonical" href="https://babycalc.kko-kkuri.com/maternity-leave">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="출산휴가 계산기">
+    <meta name="twitter:description" content="출산휴가 날짜 계산기를 제공하는 웹사이트입니다. 출산휴가 날짜를 쉽게 계산하세요">
+    <!-- <meta name="twitter:image" content="이미지 URL"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="./maternity.css">
+</head>
+<body>
+    <header>
+      <h1 class="ml-auto text-center">출산휴가 날짜 계산기 🤰</h1>
+    </header>
+    <div class="container">
+        <!-- 출산 휴가 계산기 -->
+        <section class="calculator" id="maternityLeave">
+            <div class="d-flex flex-wrap align-center maternity-leave-form">
+              <label>휴가 시작일:</label>
+              <input type="date" id="maternityStart">
+              <button class="ml-0" onclick="calculateMaternityLeave()">계산하기</button>
+            </div>
+            <p class="f-bold">휴가 마지막 날: <span id="maternityResult"></span></p>
+            <div class="info">
+              <p class="desc">* 출산휴가 기간: 출산 전후를 합하여 총 90일의 휴가가 부여됩니다. 이 중 최소 45일은 출산 후에 사용해야 합니다.<br/>다태아(쌍둥이) 출산의 경우 총 120일의 휴가가 주어집니다.</p>
+              <p class="desc">* 휴가 사용 시기: 출산 예정일을 기준으로 휴가 시작일을 설정하며, 최소 45일은 출산 후에 사용해야 합니다.</p>
+              <p class="desc">💸 출산휴가 중 급여는 월 통상임금 100% 입니다. (최대 250만원) 💸</p>
+            </div>
+        </section>
+        
+        <footer>
+            ⚠️ 본 계산기는 모의계산 결과로 법적 효력이 없으며 실제와 차이가 있을 수 있습니다.<br/>
+            해당 사이트에 의견/문제가 있다면 <a href="mailto:93rlaqhal@gmail.com">93rlaqhal@gmail.com</a>으로 연락주세요.<br />
+            현재 PC에 최적화 되어 있습니다. 곧 모바일에서 사용하기 쉽도록 개선 예정입니다. 🤗
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- Chart.js CDN -->
+    <script src="../../script.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9140923520326778"
+      crossorigin="anonymous"
+    ></script>
+    <ins
+      class="adsbygoogle"
+      style="display: block; text-align: center"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-9140923520326778"
+      data-ad-slot="9314799929"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </body>
+</html>
