@@ -421,7 +421,9 @@ header ul li a {
     padding-right: 6px;
     font-size: 0.875rem;
   }
-  .calculator-table td:first-child {
+  .calculator-table td:first-child,
+  .calculator-table td:nth-child(4),
+  .calculator-table td:last-child {
     font-weight: bold;
   }
   .calculator-table td:first-child:after,
@@ -436,5 +438,8 @@ header ul li a {
   .calculator-table td:nth-child(4):before,
   .calculator-table td:last-child:before {
     display: none;
+  }
+  button#showPopup {
+    margin-top: 0.5rem;
   }
 }
