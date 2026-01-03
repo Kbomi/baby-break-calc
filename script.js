@@ -2,21 +2,21 @@
 function calculateMaternityLeave() {
   const startDate = maternityStart.value;
   if (!startDate) {
-    alert('출산휴가 시작일을 입력해주세요.');
+    alert("출산휴가 시작일을 입력해주세요.");
     return;
   }
 
   const start = new Date(startDate);
   const end = new Date(start);
-  end.setDate(end.getDate() + 90); // 90일 추가
-  
-  const maternityResult = document.getElementById('maternityResult');
+  end.setDate(end.getDate() + 89); // 90일 추가
+
+  const maternityResult = document.getElementById("maternityResult");
   maternityResult.innerText = formatDaetKR(end);
 }
 
 // 날짜 포맷 변환 (YYYY-MM-DD)
 function formatDate(date) {
-  return date.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+  return date.toISOString().split("T")[0]; // YYYY-MM-DD 형식
 }
 
 // 날짜 포맷 변환 (YYYY년 MM월 DD일)
