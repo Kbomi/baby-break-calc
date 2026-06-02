@@ -2,14 +2,15 @@
 * {
   box-sizing: border-box;
 }
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 body {
   min-height: 100vh;
   background-color: #f9f9f9;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -128,11 +129,14 @@ input[type="date"] {
   color: #333;
   outline: none;
   cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 /* 달력 아이콘 추가 (Webkit 계열 브라우저용) */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  background: url('https://cdn-icons-png.flaticon.com/512/747/747310.png') no-repeat center;
+  background: url("https://cdn-icons-png.flaticon.com/512/747/747310.png")
+    no-repeat center;
   background-size: 1.25rem;
   cursor: pointer;
   opacity: 0.6;
@@ -150,9 +154,9 @@ select {
   padding: 0.625rem;
   border: 2px solid #ddd;
   border-radius: 8px;
-  background-image: url('./images/arrow_down.svg');
+  background-image: url("./images/arrow_down.svg");
   background-repeat: no-repeat;
-  background-position: right .75rem center;
+  background-position: right 0.75rem center;
   background-size: 1rem 0.75rem;
   font-size: 1rem;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -199,7 +203,8 @@ button#showPopup {
 table {
   border: 1px solid #333;
 }
-th, td {
+th,
+td {
   padding: 0.5rem 0.5rem;
   border: 1px solid #333;
   text-align: center;
@@ -214,7 +219,7 @@ td:nth-child(2) {
 
 /* 팝업 스타일 */
 .popup {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -222,8 +227,8 @@ td:nth-child(2) {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4); /* 검은색 배경 */
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4); /* 검은색 배경 */
 }
 .popup-content {
   background-color: #fefefe;
@@ -250,6 +255,17 @@ td:nth-child(2) {
 }
 
 /* 기타 스타일 */
+.top-banner {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #ffeeba;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  max-width: 800px;
+  margin: 0 auto;
+}
 footer {
   margin-top: auto;
   padding-top: 1.25rem;
@@ -277,9 +293,9 @@ header {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1rem;
-  -webkit-box-shadow: 0 4px 4px -1px rgba(145,145,145,1);
-  -moz-box-shadow: 0 4px 4px -1px rgba(145,145,145,1);
-  box-shadow: 0 4px 4px -1px rgba(145,145,145,1);
+  -webkit-box-shadow: 0 4px 4px -1px rgba(145, 145, 145, 1);
+  -moz-box-shadow: 0 4px 4px -1px rgba(145, 145, 145, 1);
+  box-shadow: 0 4px 4px -1px rgba(145, 145, 145, 1);
 }
 header h1 {
   margin-right: auto;
@@ -309,7 +325,7 @@ header ul li a {
 #maternityStart {
   max-width: 250px;
 }
-#maternityResult{
+#maternityResult {
   font-size: 1.25rem;
   color: #034286;
 }
@@ -364,14 +380,14 @@ header ul li a {
     font-size: 14px;
   }
   .calculator h2 {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
   header {
     flex-direction: column;
     padding: 1rem 0;
   }
   header h1 {
-    margin: 0 0 .5rem 0;
+    margin: 0 0 0.5rem 0;
   }
   .container {
     width: 100%;

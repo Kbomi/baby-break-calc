@@ -14,6 +14,54 @@ function calculateMaternityLeave() {
   maternityResult.innerText = formatDaetKR(end);
 }
 
+// 배우자 출산 휴가 계산
+function calculatePaternityLeave() {
+  const birthDateInput = document.getElementById("birthDate").value;
+  if (!birthDateInput) {
+    alert("자녀 출산일을 입력해주세요.");
+    return;
+  }
+  const birthDate = new Date(birthDateInput);
+  const deadlineDate = new Date(birthDate);
+  deadlineDate.setDate(deadlineDate.getDate() + 119); // 120일 이내
+
+  // 사용 내역 계산
+  const rows = document.querySelectorAll(".paternity-row");
+  let totalDays = 0;
+  let resultText = "";
+
+  rows.forEach((row, index) => {
+    const start = row.querySelector(".paternity-start").value;
+    const end = row.querySelector(".paternity-end").value;
+    if (start && end) {
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      
+      // 유효성 검사: 시작일이 출산일 이전인지
+      if (startDate < birthDate) {
+        alert(`${index + 1}회차 시작일이 출산일보다 빠를 수 없습니다.`);
+        return;
+      }
+      
+      const diff = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+      if (diff > 0) {
+        totalDays += diff;
+        resultText += `${index + 1}회차: ${diff}일 (${start} ~ ${end})<br/>`;
+      }
+    }
+  });
+
+  if (totalDays > 20) {
+    alert("총 휴가 일수는 20일을 초과할 수 없습니다.");
+  }
+
+  const resultDiv = document.getElementById("paternityResult");
+  const deadlineDiv = document.getElementById("paternityDeadline");
+  
+  deadlineDiv.innerText = `사용 기한 (출산일로부터 120일): ${formatDaetKR(deadlineDate)}`;
+  resultDiv.innerHTML = `총 사용 일수: ${totalDays}일 (남은 일수: ${Math.max(0, 20 - totalDays)}일)<br/><br/>${resultText}`;
+}
+
 // 날짜 포맷 변환 (YYYY-MM-DD)
 function formatDate(date) {
   return date.toISOString().split("T")[0]; // YYYY-MM-DD 형식
