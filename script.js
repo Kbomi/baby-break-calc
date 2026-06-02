@@ -1,6 +1,7 @@
 // 출산 휴가 날짜 계산
 function calculateMaternityLeave() {
   const startDate = maternityStart.value;
+  const isMultipleBirth = document.getElementById("multipleBirth").checked;
   if (!startDate) {
     alert("출산휴가 시작일을 입력해주세요.");
     return;
@@ -8,7 +9,8 @@ function calculateMaternityLeave() {
 
   const start = new Date(startDate);
   const end = new Date(start);
-  end.setDate(end.getDate() + 89); // 90일 추가
+  const leaveDays = isMultipleBirth ? 120 : 90;
+  end.setDate(end.getDate() + (leaveDays - 1));
 
   const maternityResult = document.getElementById("maternityResult");
   maternityResult.innerText = formatDaetKR(end);

@@ -64,9 +64,14 @@
     <div class="container">
         <!-- 출산 휴가 계산기 -->
         <section class="calculator" id="maternityLeave">
+            <h2>출산휴가 날짜 계산기 <span class="emoji">🤰</span><span class="update-badge">2026년 정책 반영</span></h2>
             <div class="d-flex flex-wrap align-center maternity-leave-form">
               <label>휴가 시작일:</label>
               <input type="date" id="maternityStart">
+              <div class="ml-0 d-flex align-center">
+                <input type="checkbox" id="multipleBirth" style="flex: none; width: auto; margin-right: 5px;">
+                <label for="multipleBirth" style="font-size: 0.875rem; font-weight: normal; margin: 0;">다태아(쌍둥이 등)</label>
+              </div>
               <button class="ml-0" onclick="calculateMaternityLeave()">계산하기</button>
             </div>
             <p class="f-bold">휴가 마지막 날: <span id="maternityResult"></span></p>

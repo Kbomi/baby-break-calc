@@ -77,10 +77,25 @@
     <div class="container">
       <!-- 출산 휴가 계산기 -->
       <section class="calculator" id="maternityLeave">
-        <h2>출산휴가 날짜 계산기 <span class="emoji">🤰</span></h2>
+        <h2>
+          출산휴가 날짜 계산기 <span class="emoji">🤰</span
+          ><span class="update-badge">2026년 정책 반영</span>
+        </h2>
         <div class="d-flex flex-wrap align-center maternity-leave-form">
           <label>휴가 시작일:</label>
           <input type="date" id="maternityStart" />
+          <div class="ml-0 d-flex align-center">
+            <input
+              type="checkbox"
+              id="multipleBirth"
+              style="flex: none; width: auto; margin-right: 5px"
+            />
+            <label
+              for="multipleBirth"
+              style="font-size: 0.875rem; font-weight: normal; margin: 0"
+              >다태아(쌍둥이 등)</label
+            >
+          </div>
           <button class="ml-0" onclick="calculateMaternityLeave()">
             계산하기
           </button>
@@ -113,7 +128,10 @@
 
       <!-- 배우자 출산휴가 계산기-->
       <section class="calculator" id="paternityLeave">
-        <h2>배우자 출산휴가 날짜 계산기 <span class="emoji">👨‍🍼</span></h2>
+        <h2>
+          배우자 출산휴가 날짜 계산기 <span class="emoji">👨‍🍼</span
+          ><span class="update-badge">2026년 정책 반영</span>
+        </h2>
         <div class="d-flex flex-wrap align-center maternity-leave-form">
           <label>자녀 출산일:</label>
           <input type="date" id="birthDate" />
@@ -168,7 +186,10 @@
 
       <!-- 육아 휴직 날짜 계산기 -->
       <section class="calculator" id="parentalLeave" class="hidden">
-        <h2>육아휴직 날짜 계산기 <span class="emoji">🤱</span></h2>
+        <h2>
+          육아휴직 날짜 계산기 <span class="emoji">🤱</span
+          ><span class="update-badge">2026년 정책 반영</span>
+        </h2>
         <div class="d-flex flex-wrap align-center parental-leave-select">
           <label for="leave-period">총 기간: </label>
           <select id="leave-period">
@@ -276,7 +297,8 @@
       <section class="calculator" id="parentalPay" class="hidden">
         <div class="d-flex flex-wrap align-center justify-between">
           <h2 class="col">
-            육아휴직 급여 계산기 <span class="emoji">💸</span>
+            육아휴직 급여 계산기 <span class="emoji">💸</span
+            ><span class="update-badge">2026년 정책 반영</span>
           </h2>
           <div class="col"><button id="showPopup">급여 정책 보기</button></div>
         </div>
